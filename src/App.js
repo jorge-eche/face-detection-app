@@ -63,7 +63,10 @@ function App() {
       .then((response) => response.json())
       // .then((response) => calculateFaceLocation(response))
       .then((response) => {
-        console.log("hi", response);
+        console.log(
+          "hi",
+          response.outputs[0].data.regions[0].region_info.bounding_box
+        );
       })
       .catch((err) => console.log(err));
   };
