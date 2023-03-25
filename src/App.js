@@ -2,6 +2,7 @@ import { useState } from "react";
 import ParticlesBg from "particles-bg";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
+import SignIn from "./components/SignIn/SignIn";
 import Rank from "./components/Rank/Rank";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
@@ -93,6 +94,7 @@ function App() {
       <ParticlesBg type="cobweb" color="#FFFFFF" bg={true} />
       <Navigation />
       <Logo />
+      <SignIn />
       <Rank />
       <ImageLinkForm
         onInputChange={onInputChange}
