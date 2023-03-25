@@ -10,6 +10,27 @@ import "./App.css";
 function App() {
   const [input, setInput] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [box, setBox] = useState({});
+
+  const calculateFaceLocation = (data) => {
+    const clarifaiBox =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+
+    const image = document.getElementById("inputimage");
+    const width = Number(image.width);
+    const heigth = Number(image.height);
+    return {
+      leftCol: clarifaiBox.left_col * width,
+      topRow: clarifaiBox.top_row * heigth,
+      rightCol: width - clarifaiBox.right_col * width,
+      bottomRow: heigth - clarifaiBox.bottom_row * heigth,
+    };
+  };
+
+  const displayFaceBox = (boxCoordinates) => {
+    console.log(boxCoordinates);
+    setBox(boxCoordinates);
+  };
 
   const returnClarifaiRequestOptions = (imageURL) => {
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
@@ -61,12 +82,8 @@ function App() {
       returnClarifaiRequestOptions(input)
     )
       .then((response) => response.json())
-      // .then((response) => calculateFaceLocation(response))
       .then((response) => {
-        console.log(
-          "hi",
-          response.outputs[0].data.regions[0].region_info.bounding_box
-        );
+        displayFaceBox(calculateFaceLocation(response));
       })
       .catch((err) => console.log(err));
   };
@@ -81,7 +98,7 @@ function App() {
         onInputChange={onInputChange}
         onButtonSubmit={onButtonSubmit}
       />
-      <FaceRecognition imageURL={imageURL} />
+      <FaceRecognition imageURL={imageURL} box={box} />
     </div>
   );
 }
