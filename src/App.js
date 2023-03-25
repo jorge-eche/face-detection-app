@@ -12,6 +12,11 @@ function App() {
   const [input, setInput] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [box, setBox] = useState({});
+  const [route, setRoute] = useState("signin");
+
+  const onRouteChange = (route) => {
+    setRoute(route);
+  };
 
   const calculateFaceLocation = (data) => {
     const clarifaiBox =
@@ -92,15 +97,21 @@ function App() {
   return (
     <div className="App">
       <ParticlesBg type="cobweb" color="#FFFFFF" bg={true} />
-      <Navigation />
-      <Logo />
-      <SignIn />
-      <Rank />
-      <ImageLinkForm
-        onInputChange={onInputChange}
-        onButtonSubmit={onButtonSubmit}
-      />
-      <FaceRecognition imageURL={imageURL} box={box} />
+      <Navigation onRouteChange={onRouteChange} />
+
+      {route === "signin" ? (
+        <SignIn onRouteChange={onRouteChange} />
+      ) : (
+        <>
+          <Logo />
+          <Rank />
+          <ImageLinkForm
+            onInputChange={onInputChange}
+            onButtonSubmit={onButtonSubmit}
+          />
+          <FaceRecognition imageURL={imageURL} box={box} />
+        </>
+      )}
     </div>
   );
 }
