@@ -14,8 +14,14 @@ function App() {
   const [imageURL, setImageURL] = useState("");
   const [box, setBox] = useState({});
   const [route, setRoute] = useState("signin");
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const onRouteChange = (route) => {
+    if (route === "signin") {
+      setIsSignedIn(false);
+    } else if (route === "home") {
+      setIsSignedIn(true);
+    }
     setRoute(route);
   };
 
@@ -98,7 +104,7 @@ function App() {
   return (
     <div className="App">
       <ParticlesBg type="cobweb" color="#FFFFFF" bg={true} />
-      <Navigation onRouteChange={onRouteChange} />
+      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} />
 
       {route === "home" ? (
         <>
@@ -111,7 +117,7 @@ function App() {
           <FaceRecognition imageURL={imageURL} box={box} />
         </>
       ) : route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} />
+        <SignIn onRouteChange={onRouteChange} setIsSignedIn={setIsSignedIn} />
       ) : (
         <Register onRouteChange={onRouteChange} />
       )}
