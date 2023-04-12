@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Register = ({ onRouteChange }) => {
+const Register = ({ onRouteChange, loadUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ const Register = ({ onRouteChange }) => {
   };
 
   const onSubmitSignIn = () => {
-    fetch("http://localhost:3000/signin", {
+    fetch("http://localhost:3000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -30,6 +30,7 @@ const Register = ({ onRouteChange }) => {
       .then((response) => response.json())
       .then((user) => {
         if (user) {
+          loadUser(user);
           onRouteChange("home");
         }
       });
@@ -80,9 +81,9 @@ const Register = ({ onRouteChange }) => {
           </fieldset>
           <div className="">
             <input
-              onClick={() => onRouteChange("home")}
+              onClick={onSubmitSignIn}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-              type="submit"
+              type="button"
               value="Register"
             />
           </div>
