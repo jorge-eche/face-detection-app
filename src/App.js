@@ -126,7 +126,7 @@ function App() {
       {route === "home" ? (
         <>
           <Logo />
-          <Rank />
+          <Rank user={user} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onButtonSubmit={onButtonSubmit}
@@ -134,7 +134,7 @@ function App() {
           <FaceRecognition imageURL={imageURL} box={box} />
         </>
       ) : route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} setIsSignedIn={setIsSignedIn} />
+        <SignIn onRouteChange={onRouteChange} loadUser={loadUser} />
       ) : (
         <Register onRouteChange={onRouteChange} loadUser={loadUser} />
       )}
