@@ -20,8 +20,13 @@ const SignIn = ({ onRouteChange }) => {
         email: signInEmail,
         password: signInPassword,
       }),
-    });
-    onRouteChange("home");
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === "signing in") {
+          onRouteChange("home");
+        }
+      });
   };
 
   return (
@@ -59,7 +64,7 @@ const SignIn = ({ onRouteChange }) => {
             <input
               onClick={onSubmitSignIn}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-              type="submit"
+              type="button"
               value="Sign in"
             />
           </div>
