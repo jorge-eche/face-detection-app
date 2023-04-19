@@ -36,6 +36,8 @@ function App() {
   const onRouteChange = (route) => {
     if (route === "signin") {
       setIsSignedIn(false);
+      setUser({ id: "", name: "", email: "", entries: 0, joined: new Date() });
+      setImageURL("");
     } else if (route === "home") {
       setIsSignedIn(true);
     }
