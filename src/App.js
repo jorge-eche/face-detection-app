@@ -133,7 +133,8 @@ function App() {
                 ...user,
                 ...newEntries,
               });
-            });
+            })
+            .catch(console.log);
         }
         displayFaceBox(calculateFaceLocation(response));
       })
