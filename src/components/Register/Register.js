@@ -19,7 +19,7 @@ const Register = ({ onRouteChange, loadUser }) => {
 
   const onSubmitSignIn = () => {
     //Change "https://smartbrainapi-vcz5.onrender.com/register" to "http://localhost/register" if you plan to run it locally.
-    fetch("https://smartbrainapi-vcz5.onrender.com/register", {
+    fetch("http://localhost:3000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

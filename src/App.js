@@ -70,7 +70,7 @@ function App() {
 
   const onPictureSubmit = () => {
     setImageURL(input);
-    fetch("https://smartbrainapi-vcz5.onrender.com/imageurl", {
+    fetch("http://localhost:3000/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -81,7 +81,7 @@ function App() {
       .then((response) => {
         if (response) {
           //Change "https://smartbrainapi-vcz5.onrender.com/image" to "http://localhost/image" if you plan to run it locally.
-          fetch("https://smartbrainapi-vcz5.onrender.com/image", {
+          fetch("http://localhost:3000/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
