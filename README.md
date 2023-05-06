@@ -58,15 +58,23 @@ Users should be able to:
 
 ### What I learned
 
-- 
+- First of all, I learned how to deploy a full PERN application! Of course I had to find free options so I ended up using Render for the frontend and backend and Amazon Web Services for the database as, at the time of my writing this lines, Render only offered a free 90-day trial for databases and AWS a full whole year.
+- Particularly challenging was implementing the Clarifai face-recognition API into the website. First I started connecting it from the frontend but after I have built the backend I passed it to server-side. Later on, I decided to changed the RESTfull way of connecting to the API to the new gRPC.
+- Reading documentation: this is one of the most difficult and yet critical knowledge an aspiring developer should know. I struggled not only with Clarifai but also had to learn how to implement particles-bg, Knex, BcryptJS, among others. How satisfying it is when you make it work is only comparable to how frustrating it is when you do not know what is going wrong!
+- Enter backend basic concepts! I learned how to manage requests and sending the corresponding responses, about server endpoints, middlewares, using Node on the terminal. 
+- Node.js and Express.js basic syntaxis. It was very exciting to see JavaScript working and doings its magic on the server side! 
+- This was my first encounter with databases, especifically PostgreSQL. On my way to make us of a database I created tables, done conditional selections, applied SQL functions and a long list of other useful actions we can do with PostgresSQL.
+- Finally, let's not forget about my two new software buddies: Postman for the server and pgAdmin for the database.
 
 ### If I had more time I would change this
 
-- 
+- In the future I may add error messages, for example when we enter wrong information while signing in or registering.
+- It would be also interesting to add a profile section where the user can edit/update his information or delete his profile altogether.
+- There is always some new cool functionality to add or a better way to improve your website, but as a student one has to move on to explore new topics and start new projects because as they say: 'Perfection is the enemy of the Good'.
 
 ### Continued development
 
-
+- Most probably I am going to start studying testing and then TypeScript.
 
 ## Author
 
