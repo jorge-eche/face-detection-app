@@ -68,13 +68,19 @@ function App() {
     setInput(event.target.value);
   };
 
+  const resetInput = () => {
+    setInput("");
+  };
+
   const onPictureSubmit = () => {
+    const url = input;
     setImageURL(input);
+    resetInput();
     fetch("https://smartbrainapi-vcz5.onrender.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        input: input,
+        input: url,
       }),
     })
       .then((response) => response.json())
@@ -116,6 +122,7 @@ function App() {
           <Logo />
           <Rank user={user} />
           <ImageLinkForm
+            input={input}
             onInputChange={onInputChange}
             onPictureSubmit={onPictureSubmit}
           />
