@@ -29,6 +29,7 @@ const SignIn = ({ onRouteChange, loadUser }) => {
           onRouteChange("home");
         }
       });
+    // .catch((err) => console.log("error"));
   };
 
   return (

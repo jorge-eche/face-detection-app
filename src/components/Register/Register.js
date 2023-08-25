@@ -17,7 +17,7 @@ const Register = ({ onRouteChange, loadUser }) => {
     setPassword(event.target.value);
   };
 
-  const onSubmitSignIn = () => {
+  const onSubmitRegister = () => {
     //Change "https://smartbrainapi-vcz5.onrender.com/register" to "http://localhost/register" if you plan to run it locally.
     fetch("https://smartbrainapi-vcz5.onrender.com/register", {
       method: "post",
@@ -82,7 +82,7 @@ const Register = ({ onRouteChange, loadUser }) => {
           </fieldset>
           <div className="">
             <input
-              onClick={onSubmitSignIn}
+              onClick={onSubmitRegister}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="button"
               value="Register"
