@@ -60,22 +60,31 @@ const SignIn = ({ onRouteChange, loadUser }) => {
   };
 
   const onSubmitSignIn = () => {
-    //Change "https://smartbrainapi-vcz5.onrender.com/signin" to "http://localhost/signin" if you plan to run it locally.
-    fetch("https://smartbrainapi-vcz5.onrender.com/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
-          onRouteChange("home");
-        }
-      });
+    if (formIsValid) {
+      setIsError(false);
+      //Change "https://smartbrainapi-vcz5.onrender.com/signin" to "http://localhost/signin" if you plan to run it locally.
+      fetch("https://smartbrainapi-vcz5.onrender.com/signin", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailState.value,
+          password: passwordState.value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          if (user.id) {
+            loadUser(user);
+            onRouteChange("home");
+          } else {
+            setIsError(true);
+          }
+        });
+    } else if (!emailState.isValid) {
+      emailInputRef.current.focus();
+    } else {
+      passwordInputRef.current.focus();
+    }
   };
 
   return (
