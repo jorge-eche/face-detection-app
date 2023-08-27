@@ -1,34 +1,90 @@
-import { useState } from "react";
+import { useReducer, useState, useEffect, useRef } from "react";
+
+const emailReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
+  return { value: "", isValid: null };
+};
+
+const passwordReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.trim().length > 0 };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.trim().length > 0 };
+  }
+  return { value: "", isValid: null };
+};
 
 const SignIn = ({ onRouteChange, loadUser }) => {
-  const [signInEmail, setSignInEmail] = useState("");
-  const [signInPassword, setSignInPassword] = useState("");
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: null,
+  });
 
-  const onEmailChange = (event) => {
-    setSignInEmail(event.target.value);
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setFormIsValid(emailState.isValid && passwordState.isValid);
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [emailState.isValid, passwordState.isValid]);
+
+  const onInputChange = (event) => {
+    if (event.target.type === "email")
+      dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+    if (event.target.type === "password")
+      dispatchPassword({ type: "USER_INPUT", val: event.target.value });
   };
 
-  const onPasswordChange = (event) => {
-    setSignInPassword(event.target.value);
+  const onInputBlur = (event) => {
+    if (event.target.type === "email") dispatchEmail({ type: "INPUT_BLUR" });
+    if (event.target.type === "password")
+      dispatchPassword({ type: "INPUT_BLUR" });
   };
 
   const onSubmitSignIn = () => {
-    //Change "https://smartbrainapi-vcz5.onrender.com/signin" to "http://localhost/signin" if you plan to run it locally.
-    fetch("https://smartbrainapi-vcz5.onrender.com/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
-          onRouteChange("home");
-        }
-      });
+    if (formIsValid) {
+      setIsError(false);
+      //Change "https://smartbrainapi-vcz5.onrender.com/signin" to "http://localhost/signin" if you plan to run it locally.
+      fetch("https://smartbrainapi-vcz5.onrender.com/signin", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailState.value,
+          password: passwordState.value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          if (user.id) {
+            loadUser(user);
+            onRouteChange("home");
+          } else {
+            setIsError(true);
+          }
+        });
+    } else if (!emailState.isValid) {
+      emailInputRef.current.focus();
+    } else {
+      passwordInputRef.current.focus();
+    }
   };
 
   return (
@@ -42,11 +98,13 @@ const SignIn = ({ onRouteChange, loadUser }) => {
                 Email
               </label>
               <input
-                onChange={onEmailChange}
+                ref={emailInputRef}
                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="email"
                 name="email-address"
                 id="email-address"
+                onChange={onInputChange}
+                onBlur={onInputBlur}
               />
             </div>
             <div className="mv3">
@@ -54,14 +112,19 @@ const SignIn = ({ onRouteChange, loadUser }) => {
                 Password
               </label>
               <input
-                onChange={onPasswordChange}
+                ref={passwordInputRef}
                 className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
                 id="password"
+                onChange={onInputChange}
+                onBlur={onInputBlur}
               />
             </div>
           </fieldset>
+          {isError && (
+            <p className="mb3 f3 dark-pink">Wrong email or password</p>
+          )}
           <div className="">
             <input
               onClick={onSubmitSignIn}
