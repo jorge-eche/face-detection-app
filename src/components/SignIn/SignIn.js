@@ -47,16 +47,21 @@ const SignIn = ({ onRouteChange, loadUser }) => {
   }, [emailState.isValid, passwordState.isValid]);
 
   const onInputChange = (event) => {
-    if (event.target.type === "email")
-      dispatchEmail({ type: "USER_INPUT", val: event.target.value });
-    if (event.target.type === "password")
-      dispatchPassword({ type: "USER_INPUT", val: event.target.value });
+    switch (event.target.type) {
+      case "email":
+        dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+        break;
+      default:
+        dispatchPassword({ type: "USER_INPUT", val: event.target.value });
+    }
   };
 
   const onInputBlur = (event) => {
-    if (event.target.type === "email") dispatchEmail({ type: "INPUT_BLUR" });
-    if (event.target.type === "password")
+    if (event.target.type === "email") {
+      dispatchEmail({ type: "INPUT_BLUR" });
+    } else {
       dispatchPassword({ type: "INPUT_BLUR" });
+    }
   };
 
   const onSubmitSignIn = () => {
@@ -80,10 +85,12 @@ const SignIn = ({ onRouteChange, loadUser }) => {
             setIsError(true);
           }
         });
-    } else if (!emailState.isValid) {
-      emailInputRef.current.focus();
     } else {
-      passwordInputRef.current.focus();
+      if (!emailState.isValid) {
+        emailInputRef.current.focus();
+      } else {
+        passwordInputRef.current.focus();
+      }
     }
   };
 
