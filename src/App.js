@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ParticlesBg from "particles-bg";
+import Spinner from "react-spinners/RingLoader";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import SignIn from "./components/SignIn/SignIn";
@@ -22,6 +23,8 @@ function App() {
     entries: 0,
     joined: new Date(),
   });
+
+  const [loading, setIsLoading] = useState(false);
 
   const loadUser = (data) => {
     setUser({
@@ -112,6 +115,10 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const loadingHandler = () => {
+    setIsLoading((prevState) => !prevState);
+  };
+
   return (
     <div className="App">
       <ParticlesBg type="cobweb" color="#FFFFFF" bg={true} />
@@ -129,9 +136,35 @@ function App() {
           <FaceRecognition imageURL={imageURL} box={box} />
         </>
       ) : route === "signin" ? (
-        <SignIn onRouteChange={onRouteChange} loadUser={loadUser} />
+        <>
+          <SignIn
+            onRouteChange={onRouteChange}
+            loadUser={loadUser}
+            loadingHandler={loadingHandler}
+          />
+          <Spinner
+            color="#e75480"
+            loading={loading}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            cssOverride={{ margin: "auto" }}
+          />
+        </>
       ) : (
-        <Register onRouteChange={onRouteChange} loadUser={loadUser} />
+        <>
+          <Register
+            onRouteChange={onRouteChange}
+            loadUser={loadUser}
+            loadingHandler={loadingHandler}
+          />
+          <Spinner
+            color="#e75480"
+            loading={loading}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            cssOverride={{ margin: "auto" }}
+          />
+        </>
       )}
     </div>
   );

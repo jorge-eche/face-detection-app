@@ -20,7 +20,7 @@ const passwordReducer = (state, action) => {
   return { value: "", isValid: null };
 };
 
-const SignIn = ({ onRouteChange, loadUser }) => {
+const SignIn = ({ onRouteChange, loadUser, loadingHandler }) => {
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
     isValid: null,
@@ -67,6 +67,7 @@ const SignIn = ({ onRouteChange, loadUser }) => {
   const onSubmitSignIn = () => {
     if (formIsValid) {
       setIsError(false);
+      loadingHandler();
       //Change "https://smartbrainapi-vcz5.onrender.com/signin" to "http://localhost/signin" if you plan to run it locally.
       fetch("https://smartbrainapi-vcz5.onrender.com/signin", {
         method: "post",
@@ -78,6 +79,7 @@ const SignIn = ({ onRouteChange, loadUser }) => {
       })
         .then((response) => response.json())
         .then((user) => {
+          loadingHandler();
           if (user.id) {
             loadUser(user);
             onRouteChange("home");

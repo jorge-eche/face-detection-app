@@ -28,7 +28,7 @@ const passwordReducer = (state, action) => {
   return { value: "", isValid: null };
 };
 
-const Register = ({ onRouteChange, loadUser }) => {
+const Register = ({ onRouteChange, loadUser, loadingHandler }) => {
   const [nameState, dispatchName] = useReducer(nameReducer, {
     value: "",
     isValid: null,
@@ -92,6 +92,7 @@ const Register = ({ onRouteChange, loadUser }) => {
   const onSubmitRegister = () => {
     if (formIsValid) {
       setIsError(false);
+      loadingHandler();
       //Change "https://smartbrainapi-vcz5.onrender.com/register" to "http://localhost/register" if you plan to run it locally.
       fetch("https://smartbrainapi-vcz5.onrender.com/register", {
         method: "post",
@@ -104,6 +105,7 @@ const Register = ({ onRouteChange, loadUser }) => {
       })
         .then((response) => response.json())
         .then((user) => {
+          loadingHandler();
           if (user.id) {
             loadUser(user);
             onRouteChange("home");
