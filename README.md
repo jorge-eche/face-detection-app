@@ -21,13 +21,14 @@ A Fullstack PERN app that recognizes faces on images uploaded by the user.
 
 Users should be able to:
 
-- Recognize a face on the image URL you input.
-- Register your own user safely, with passwords hashed.
-- Sign in and sign out from your created profile.
-- Enjoy Form validation.
-- See how many entries (image URLs) you have inputed so far.
-- View the optimal layout depending on their device's screen size.
+- Input a URL and let the app recognize and frame the face from the image.
+- Register their own user safely, with hashed passwords.
+- Sign in and sign out from their profile.
+- Be guided by Form Validation during Sign-in / Register. .
+- See how many entries (image URLs) they have inputed so far.
+- View the website optimal layout depending on their device's screen size.
 - See hover states for interactive elements.
+- View a spinner component while the app is making HTTP requests to Clarifai API.
 
 ### Screenshot
 
@@ -55,6 +56,7 @@ Users should be able to:
 - [Semantic HTML5 markup](https://www.w3.org/html/) - For the web structure
 - [particles-bg](https://www.npmjs.com/package/particles-bg) - Particle animation library
 - [BcryptJS](https://www.npmjs.com/package/bcryptjs) - Password hashing library
+- [React Spinners](https://www.npmjs.com/package/react-spinners) - Collection of loading spinners library.
 
 ### What I learned
 
@@ -68,7 +70,7 @@ Users should be able to:
 
 ### If I had more time I would change this
 
-- In the future I may add error messages, for example when we enter wrong information while signing in or registering.
+- In the future I may add error messages, for example when we enter wrong information while signing in or registering. EDIT: August 2023, form validations error messages + focus method on empty inputs were added!
 - It would be also interesting to add a profile section where the user can edit/update his information or delete his profile altogether.
 - There is always some new cool functionality to add or a better way to improve your website, but as a student one has to move on to explore new topics and start new projects because as they say: 'Perfection is the enemy of the Good'.
 
