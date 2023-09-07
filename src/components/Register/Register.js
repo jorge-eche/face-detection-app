@@ -130,6 +130,7 @@ const Register = ({ onRouteChange, loadUser, loadingHandler }) => {
         <form className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f1 fw6 ph0 mh0">Register</legend>
+            <p className="f7">Enter a dummy name, email & password</p>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="name">
                 Name
@@ -138,7 +139,7 @@ const Register = ({ onRouteChange, loadUser, loadingHandler }) => {
                 ref={nameInputRef}
                 onChange={onInputChange}
                 onBlur={onInputBlur}
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="pa2 input-reset ba b--black-20 bg-transparent hover-bg-black hover-white w-100"
                 type="text"
                 name="name"
                 id="name"
@@ -152,7 +153,7 @@ const Register = ({ onRouteChange, loadUser, loadingHandler }) => {
                 ref={emailInputRef}
                 onChange={onInputChange}
                 onBlur={onInputBlur}
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="pa2 input-reset ba b--black-20 bg-transparent hover-bg-black hover-white w-100"
                 type="email"
                 name="email"
                 id="email"
@@ -166,7 +167,7 @@ const Register = ({ onRouteChange, loadUser, loadingHandler }) => {
                 ref={passwordInputRef}
                 onChange={onInputChange}
                 onBlur={onInputBlur}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba b--black-20 bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
                 id="password"

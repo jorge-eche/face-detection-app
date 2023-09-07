@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ParticlesBg from "particles-bg";
-import Spinner from "react-spinners/RingLoader";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import SignIn from "./components/SignIn/SignIn";
@@ -8,6 +7,7 @@ import Register from "./components/Register/Register";
 import Rank from "./components/Rank/Rank";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+import Loading from "./components/Loading/Loading";
 import "./App.css";
 
 function App() {
@@ -142,13 +142,7 @@ function App() {
             loadUser={loadUser}
             loadingHandler={loadingHandler}
           />
-          <Spinner
-            color="#e75480"
-            loading={loading}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-            cssOverride={{ margin: "auto" }}
-          />
+          {loading && <Loading />}
         </>
       ) : (
         <>
@@ -157,13 +151,7 @@ function App() {
             loadUser={loadUser}
             loadingHandler={loadingHandler}
           />
-          <Spinner
-            color="#e75480"
-            loading={loading}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-            cssOverride={{ margin: "auto" }}
-          />
+          {loading && <Loading />}
         </>
       )}
     </div>

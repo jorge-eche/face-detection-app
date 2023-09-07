@@ -108,7 +108,7 @@ const SignIn = ({ onRouteChange, loadUser, loadingHandler }) => {
               </label>
               <input
                 ref={emailInputRef}
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="pa2 input-reset ba b--black-20 bg-transparent hover-bg-black hover-white w-100"
                 type="email"
                 name="email-address"
                 id="email-address"
@@ -122,7 +122,7 @@ const SignIn = ({ onRouteChange, loadUser, loadingHandler }) => {
               </label>
               <input
                 ref={passwordInputRef}
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                className="b pa2 input-reset ba b--black-20 bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
                 id="password"
